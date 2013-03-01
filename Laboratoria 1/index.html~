@@ -1,0 +1,16 @@
+!DOCTYPE
+
+<html>
+  <head>
+    <title>Strona główna</title>
+    <meta charset="utf-8">
+    <style></style>
+  </head>
+  <body>
+    <h3>Artykuły:</h3>
+    <ul>
+      <li><a href="article1.html">Artykuł 1</a></li>
+      <li><a href="article2.html">Artykuł 2</a></li>
+    </ul>
+  </body>
+</html>
