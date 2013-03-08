@@ -18,3 +18,25 @@
 .sections section div:nth-child(odd) {
   font-weight: bold;
 }
+
+.sections section div img {
+	width: 200px;
+}
+
+.sections section div img.left {
+	float: left;
+	margin-right: 10px;
+}
+
+.sections section div img.right {
+	float: right;
+	margin-left: 10px;
+}
+
+.sections section div img.right + div {
+	clear: right;
+}
+
+.sections section div img.left + div {
+	clear: left;
+}
