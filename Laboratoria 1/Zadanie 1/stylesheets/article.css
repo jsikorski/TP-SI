@@ -1,0 +1,61 @@
+.sections section h2 {
+  font-size: 2em;
+}
+
+.sections section div {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  text-align: justify;
+}
+
+.sections section div:first-of-type {
+  text-decoration: underline
+}
+
+.sections section div:nth-child(even) {
+  font-style: italic;
+}
+
+.sections section div:nth-child(odd) {
+  font-weight: bold;
+}
+
+.sections section div img {
+	width: 200px;
+}
+
+.sections section div img.left {
+	float: left;
+	margin-right: 10px;
+}
+
+.sections section div img.right {
+	float: right;
+	margin-left: 10px;
+}
+
+.sections section div img.right + div {
+	clear: right;
+}
+
+.sections section div img.left + div {
+	clear: left;
+}
+
+.sections section div.contains-watermark {
+	position: relative;
+}
+
+.sections section img.watermark {
+	position: absolute;
+	z-index: -1;
+	opacity: 0.5;
+}
+
+.sections section img.watermark.right {
+	right: 0;
+}
+
+.sections section img.watermark.bottom {
+	bottom: 0;
+}
