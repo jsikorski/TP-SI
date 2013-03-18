@@ -1,0 +1,12 @@
+p:nth-child(odd) {
+	color: red;
+}
+
+p:nth-child(3n+1) {
+	font-weight: bold;
+}
+
+p:hover {
+	opacity: 0.5;
+}
+
