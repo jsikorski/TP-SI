@@ -21,7 +21,7 @@
 }
 
 .sections section div img {
-	width: 200px;
+	height: 150px;
 }
 
 .sections section div img.left {
@@ -34,16 +34,13 @@
 	margin-left: 10px;
 }
 
-.sections section div img.right + div {
-	clear: right;
-}
-
-.sections section div img.left + div {
-	clear: left;
+.sections section div .clear {
+	clear: both;
 }
 
 .sections section div.contains-watermark {
 	position: relative;
+	min-height: 150px;
 }
 
 .sections section img.watermark {
