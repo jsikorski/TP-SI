@@ -1,0 +1,82 @@
+<!DOCTYPE>
+
+<html>
+	<head>
+		<title>Paragrafy</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+	</head>
+	<body>
+		<form>
+			<fieldset>
+				<legend>Formularz</legend>
+
+				<div class="data-line">
+					<label for="textbox" accesskey="Y">Pole tekstowe:</label>
+					<input id="textbox" type="text" tabindex="1"></input>
+				</div>
+
+				<div class="data-line">
+					<input id="checkbox1" type="checkbox" tabindex="2"></input>
+					<label for="checkbox1" accesskey="U">Checkbox 1</label>
+				</div>
+
+				<div class="data-line">
+					<input id="checkbox2" type="checkbox" tabindex="3"></input>
+					<label for="checkbox2" accesskey="I">Checkbox 2</label>
+				</div>
+
+				<div class="data-line">
+					<input id="checkbox3" type="checkbox" tabindex="4"></input>
+					<label for="checkbox3" accesskey="O">Checkbox 3</label>
+				</div>
+
+				<div class="data-line">
+					<input id="radiobutton1" type="radio" name="group1" value="value1" tabindex="5"></input>
+					<label for="radiobutton1" accesskey="P">Radiobutton 1</label>
+
+					<input id="radiobutton2" type="radio" name="group1" value="value2" tabindex="5"></input>
+					<label for="radiobutton2" accesskey="H">Radiobutton 2</label>
+
+					<input id="radiobutton3" type="radio" name="group1" value="value3" tabindex="5"></input>
+					<label for="radiobutton3" accesskey="J">Radiobutton 3</label>
+				</div>
+
+				<div class="data-line">
+					<label for="textarea" accesskey="K">Obszar tekstowy:</label>
+					<textarea id="textarea" tabindex="6"></textarea>
+				</div>
+				
+				<div class="data-line">
+					<label for="combobox" accesskey="L">Combobox:</label>
+					<select id="combobox" tabindex="7">
+						<option value="value1">Value 1</option>
+						<option value="value2">Value 2</option>
+						<option value="value3">Value 3</option>
+						<option value="value4">Value 4</option>
+						<option value="value5">Value 5</option>
+					</select>
+				</div>
+
+				<div class="data-line">
+					<label for="multiple-select" accesskey="N">Multiple select:</label>
+					<select multiple id="multiple-select" tabindex="8">
+						<option value="value1">Value 1</option>
+						<option value="value2">Value 2</option>
+						<option value="value3">Value 3</option>
+						<option value="value4">Value 4</option>
+						<option value="value5">Value 5</option>
+					</select>
+				</div>
+
+				<div class="data-line">
+					<label for="password" accesskey="M">Hasło:</label>
+					<input id="password" type="password" tabindex="9"></input>
+				</div>
+
+				<button type="submit" accesskey="S" tabindex="10">Submit</button>
+				<button type="reset" accesskey="R" tabindex="11">Reset</button>
+			</fieldset>
+		</form>
+	</body>
+</html>
