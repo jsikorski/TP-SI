@@ -1,0 +1,30 @@
+td {
+	font-size: 1.5em;
+	height: 50px;
+	width: 50px;
+	border: 1px black solid;
+	text-align: center;
+}
+
+tr:first-child td {
+	text-decoration: underline;
+	background: yellow;
+}
+
+tr:nth-child(odd) td:nth-child(odd) {
+	color: red;
+	font-weight: bold;
+}
+
+tr:nth-child(odd) td:nth-child(even) {
+	color: blue;
+}
+
+tr:nth-child(even) td:nth-child(odd) {
+	color: blue;
+}
+
+tr:nth-child(even) td:nth-child(even) {
+	color: red;
+	font-weight: bold;
+}
