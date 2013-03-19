@@ -1,0 +1,16 @@
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	color: orange;
+}
+
+a:visited {
+	font-weight: bold;
+}
+
+a:focus {
+	font-style: italic;
+	text-decoration: underline;
+}
