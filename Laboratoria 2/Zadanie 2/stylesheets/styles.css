@@ -1,0 +1,25 @@
+.images-browser {
+	margin: 0 auto;
+	width: 550;
+	padding: 25px;
+}
+
+.images-browser .selected-image {
+	width: 519px;
+	height: 519px;
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 15px;
+}
+
+.images-browser .images-roll {
+	margin: 0 auto;
+	width: 519px;
+}
+
+.images-browser .images-roll img {
+	width: 100px;
+	height: 100px;
+	opacity: 0.5;
+	cursor: pointer;
+}
