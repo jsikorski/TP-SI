@@ -4,10 +4,6 @@ div {
 	height: 200px;
 }
 
-div.blue {
-	background: lightblue;
-}
-
 div img {
 	width: 200px;
 	height: 200px;
@@ -23,14 +19,30 @@ div table tr td {
 .top-left {
 	top: 0px;
 	left: 0px;
+	background: lightblue;
+	z-index: 1;
 }
 
 .top-right {
 	top: 0px;
 	right: 0px;
+	z-index: 2;
 }
 
 .bottom-left {
 	bottom: 0px;
 	left: 0px;
+	z-index: 3;
+}
+
+.buttons {
+	position: absolute;
+	left: 50%;
+	margin-left: -125px;
+	z-index: 100;
+	width: 210px;
+}
+
+.buttons button {
+	width: 100px;
 }

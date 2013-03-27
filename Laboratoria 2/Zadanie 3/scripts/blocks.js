@@ -1,7 +1,5 @@
 var Block = (function() {
 
-	var speed = 4;
-
 	var update = function() {
 		offsetTop = this.el.offsetTop
 		offsetLeft = this.el.offsetLeft
@@ -19,6 +17,7 @@ var Block = (function() {
 	}
 
 	function Block(el, vX, vY) {
+		this.speed = 50;
 		this.el = el;
 		this.vX = vX;
 		this.vY = vY;
@@ -27,16 +26,9 @@ var Block = (function() {
 	Block.prototype.start = function() {
 		var that = this;
 
-		var stopHandler = that.el.addEventListener(
-			'mouseup', function() { 
-				this.removeEventListener('mouseup', stopHandler, false)
-				that.stop.call(that); 
-			}, false
-		);
-
 		that.interval = setInterval(function() {
 			update.call(that);
-		}, speed)
+		}, that.speed)
 	};
 
 	Block.prototype.stop = function() {
@@ -44,17 +36,31 @@ var Block = (function() {
 	};
 
 	Block.prototype.changeSpeed = function(delta) {
-		speed += delta;
+		this.speed += delta;
+		this.stop();
+		this.start();
 	};
 
 	return Block;
 })();
 
 var topLeft = new Block(document.getElementsByClassName('top-left')[0], 1, 1);
-topLeft.start();
-
 var topRight = new Block(document.getElementsByClassName('top-right')[0], -1, 1)
-topRight.start();
-
 var bottomLeft = new Block(document.getElementsByClassName('bottom-left')[0], 1, -1)
+
+var increaseSpeed = document.getElementById('increase-speed');
+var decreaseSpeed = document.getElementById('decrease-speed');
+
+var changeSpeed = function(delta) {
+	topLeft.changeSpeed(delta);
+	topRight.changeSpeed(delta);
+	bottomLeft.changeSpeed(delta);
+};
+
+var bindEvent = increaseSpeed.addEventListener || increaseSpeed.attachEvent;
+bindEvent.call(increaseSpeed, 'mouseup', function() { changeSpeed(-10); }, false);
+bindEvent.call(decreaseSpeed, 'mouseup', function() { changeSpeed(10); }, false);
+
+topLeft.start();
+topRight.start();
 bottomLeft.start();
