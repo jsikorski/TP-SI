@@ -1,0 +1,36 @@
+div {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+}
+
+div.blue {
+	background: lightblue;
+}
+
+div img {
+	width: 200px;
+	height: 200px;
+}
+
+div table tr td {
+	width: 64px;
+	height: 64px;
+	text-align: center;
+	border: 1px solid;
+}
+
+.top-left {
+	top: 0px;
+	left: 0px;
+}
+
+.top-right {
+	top: 0px;
+	right: 0px;
+}
+
+.bottom-left {
+	bottom: 0px;
+	left: 0px;
+}
