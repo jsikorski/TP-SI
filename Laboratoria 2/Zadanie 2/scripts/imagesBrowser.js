@@ -1,34 +1,40 @@
-var ImagesBrowser = function() {};
+var ImagesBrowser = function() {
 
-ImagesBrowser.prototype.init = function() {
-	var browser = document.getElementsByClassName('images-browser')[0];
-	var selectedImage = browser.getElementsByClassName('selected-image')[0];
-	var roll = browser.getElementsByClassName('images-roll')[0];
-	var tiles = roll.getElementsByTagName('img');
+	function ImagesBrowser(el) {
+		this.el = el;
+	};
 
-	for (var i = 0; i < tiles.length; i++) {
-		var tile = tiles[i];
-		var originalOpacity = tile.style.opacity;
-		
-		var select = function() { 
-			var src = this.getAttribute('src')
-			selectedImage.setAttribute('src', src); 
-		};
+	ImagesBrowser.prototype.init = function() {
+		var selectedImage = this.el.getElementsByClassName('selected-image')[0];
+		var roll = this.el.getElementsByClassName('images-roll')[0];
+		var tiles = roll.getElementsByTagName('img');
 
-		var highlight = function() {
-			this.style.opacity = 1.0;
-		};
+		for (var i = 0; i < tiles.length; i++) {
+			var tile = tiles[i];
+			var originalOpacity = tile.style.opacity;
+			
+			var select = function() { 
+				var src = this.getAttribute('src')
+				selectedImage.setAttribute('src', src); 
+			};
 
-		var removeHighlight = function() {
-			this.style.opacity = originalOpacity;
-		};
+			var highlight = function() {
+				this.style.opacity = 1.0;
+			};
 
-		var on = tile.addEventListener || tile.attachEvent;
-		on.call(tile, 'click', select, false);
-		on.call(tile, 'mouseover', highlight, false);
-		on.call(tile, 'mouseout', removeHighlight, false);
-	}
-};
+			var removeHighlight = function() {
+				this.style.opacity = originalOpacity;
+			};
 
-var imagesBrowser = new ImagesBrowser();
+			var bindEvent = tile.addEventListener || tile.attachEvent;
+			bindEvent.call(tile, 'click', select, false);
+			bindEvent.call(tile, 'mouseover', highlight, false);
+			bindEvent.call(tile, 'mouseout', removeHighlight, false);
+		}
+	};
+
+	return ImagesBrowser;
+}();
+
+var imagesBrowser = new ImagesBrowser(document.getElementsByClassName('images-browser')[0]);
 imagesBrowser.init();
