@@ -1,0 +1,36 @@
+<!DOCTYPE>
+
+<html>
+	<head>
+		<title>Kalkulator potęg</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+	</head>
+	<body>
+		<form>
+			<div class="data-line">
+				<label for="base">Podstawa:</label>
+				<input id="base" type="text"></type>
+			</div>
+
+			<div class="data-line">
+				<label for="exponent">Wykładnik:</label>
+				<input id="exponent" type="text"></type>
+			</div>
+
+			<button id="power" type="button">Oblicz</button>
+		</form>
+
+		<table>
+			<thead>
+				<tr>
+					<td>Działanie</td>
+					<td>Wynik</td>
+				</tr>
+			</thead>
+			<tbody id="results">
+			</tbody>
+		</table>
+	</body>
+	<script type="text/javascript" src="scripts/calculator.js"></script>
+</html>
