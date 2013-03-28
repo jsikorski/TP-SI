@@ -110,9 +110,9 @@ var computeOnEnter = function(event) {
 
 
 var form = document.getElementsByTagName('form')[0];
-var attachEvent = form.addEventListener || form.attachEvent;
-attachEvent.call(form, 'keyup', computeOnEnter, false);
+var bindEvent = form.addEventListener || form.attachEvent;
+bindEvent.call(form, 'keyup', computeOnEnter, false);
 
 var power = document.getElementById("power");
-attachEvent = power.addEventListener || power.attachEvent;
-attachEvent.call(power, 'mouseup', computePower, false);
+bindEvent = power.addEventListener || power.attachEvent;
+bindEvent.call(power, 'mouseup', computePower, false);
