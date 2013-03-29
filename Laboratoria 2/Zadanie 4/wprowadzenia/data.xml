@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<praca>
+	<rozdzial numer="1">
+		Wprowadzenie do rodziału 1.
+		<paragraf autor="Nazwisko1">Treść paragrafu 1.1.</paragraf>
+		<paragraf autor="Nazwisko2">Treść paragrafu 1.2.</paragraf>
+		<paragraf autor="Nazwisko2">Treść paragrafu 1.3.</paragraf>
+		<paragraf autor="Nazwisko3">Treść paragrafu 1.4.</paragraf>
+		<paragraf autor="Nazwisko4">Treść paragrafu 1.5.</paragraf>
+		<bibliografia>Bib1, 2013</bibliografia>
+		<bibliografia>Bib2, 2010</bibliografia>
+		<bibliografia>Bib3, 2011</bibliografia>
+	</rozdzial>
+	<rozdzial numer="2">
+		Wprowadzenie do rodziału 2.
+		<paragraf autor="Nazwisko4">Treść paragrafu 2.1.</paragraf>
+		<paragraf autor="Nazwisko3">Treść paragrafu 2.2.</paragraf>
+		<paragraf autor="Nazwisko1">Treść paragrafu 2.3.</paragraf>
+		<paragraf autor="Nazwisko2">Treść paragrafu 2.4.</paragraf>
+		<paragraf autor="Nazwisko1">Treść paragrafu 2.5.</paragraf>
+		<bibliografia>Bib4, 2011</bibliografia>
+		<bibliografia>Bib5, 2013</bibliografia>
+		<bibliografia>Bib6, 2012</bibliografia>
+	</rozdzial>
+	<rozdzial numer="3">
+		Wprowadzenie do rodziału 3.
+		<paragraf autor="Nazwisko1">Treść paragrafu 3.1.</paragraf>
+		<paragraf autor="Nazwisko2">Treść paragrafu 3.2.</paragraf>
+		<paragraf autor="Nazwisko3">Treść paragrafu 3.3.</paragraf>
+		<paragraf autor="Nazwisko1">Treść paragrafu 3.4.</paragraf>
+		<paragraf autor="Nazwisko3">Treść paragrafu 3.5.</paragraf>
+		<bibliografia>Bib7, 2010</bibliografia>
+		<bibliografia>Bib8, 2008</bibliografia>
+		<bibliografia>Bib9, 2002</bibliografia>
+	</rozdzial>
+	<rozdzial numer="4">
+		Wprowadzenie do rodziału 4.
+		<paragraf autor="Nazwisko3">Treść paragrafu 4.1.</paragraf>
+		<paragraf autor="Nazwisko1">Treść paragrafu 4.2.</paragraf>
+		<paragraf autor="Nazwisko2">Treść paragrafu 4.3.</paragraf>
+		<paragraf autor="Nazwisko1">Treść paragrafu 4.4.</paragraf>
+		<paragraf autor="Nazwisko3">Treść paragrafu 4.5.</paragraf>
+		<bibliografia>Bib10, 1998</bibliografia>
+		<bibliografia>Bib11, 2000</bibliografia>
+		<bibliografia>Bib12, 2012</bibliografia>
+	</rozdzial>
+</praca>
