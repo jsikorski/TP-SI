@@ -1,5 +1,12 @@
 Models = (function() {
 
+	/**** Label ****/
+	var Label = function(text, position) {
+		this.text = text;
+		this.position = position;
+	}
+
+
 	/**** Point 2D ****/
 	var Point2D = function(x, y) {
 		this.x = x;
@@ -28,11 +35,32 @@ Models = (function() {
 
 	_.extend(Point3D.prototype, {
 		multiplyByScalars: function(xFactor, yFactor, zFactor) {
-			return new Point3D(
-				this.x *= xFactor,
-				this.y *= yFactor,
-				this.z *= zFactor
-			);
+			var newX = this.x * xFactor;
+			var newY = this.y * yFactor;
+			var newZ = this.z * zFactor;
+
+			var newPoint = new Point3D(newX, newY, newZ);
+
+			if (!this.hasLabels())
+				return newPoint;
+
+			for (var i = 0; i < this.labels.length; i++) {
+				var label = this.labels[i];
+				var labelPosition = label.position;
+
+				var offsetX = labelPosition.x - this.x;
+				var offsetY = labelPosition.y - this.y;
+				var offsetZ = labelPosition.z - this.z;
+
+				newPoint.attachLabel(
+					label.text,
+					offsetX, 
+					offsetY,
+					offsetZ
+				);
+			};
+
+			return newPoint;
 		},
 
 		to2D: function(alpha, beta) {
@@ -48,6 +76,21 @@ Models = (function() {
 
 		toArray: function() {
 			return [this.x, this.y, this.z];
+		},
+
+		attachLabel: function(text, offsetX, offsetY, offsetZ) {
+			var labels = this.labels = this.labels || [];
+			var position = new Point3D(
+				this.x + offsetX, 
+				this.y + offsetY, 
+				this.z + offsetZ
+			);
+
+			labels.push(new Label(text, position));
+		},
+
+		hasLabels: function() {
+			return this.labels != undefined && this.labels != null && this.labels.length > 0;
 		}
 	});
 
@@ -62,7 +105,7 @@ Models = (function() {
 	_.extend(Line.prototype, {
 		scaleEnd: function(xFactor, yFactor, zFactor) {
 			var to = this.to.multiplyByScalars(xFactor, yFactor, zFactor);
-			return new Line(this.from, this.to, this.color);
+			return new Line(this.from, to, this.color);
 		}
 	});
 
@@ -81,10 +124,19 @@ Models = (function() {
 
 	/**** Coordinate system ****/
 	var CoordinateSystem = function() {
+		var origin = new Point3D(0, 0, 0);
+		var x = new Point3D(1, 0, 0);
+		var y = new Point3D(0, 1, 0);
+		var z = new Point3D(0, 0, 1);
+
+		x.attachLabel('x', -10, 20, 0);
+		y.attachLabel('y', 0, -10, 10);
+		z.attachLabel('z', 0, 20, -10);
+
 		this.lines = [
-			new Line(new Point3D(0, 0, 0), new Point3D(1, 0, 0), '#ff0000'),
-			new Line(new Point3D(0, 0, 0), new Point3D(0, 1, 0), '#00ff00'),
-			new Line(new Point3D(0, 0, 0), new Point3D(0, 0, 1), '#0000ff')
+			new Line(origin, x, '#ff0000'),
+			new Line(origin, y, '#00ff00'),
+			new Line(origin, z, '#0000ff')
 		]
 	};
 
@@ -111,7 +163,7 @@ Models = (function() {
 					var yNextX = equationModel.getValue(nextX, z);
 					var yNextZ = equationModel.getValue(x, nextZ);
 
-					// Omit points with undefined values.
+					// Ommit points with undefined values.
 					if (!y)
 						continue;
 
@@ -176,7 +228,6 @@ Models = (function() {
 		getValue: function(x, z) {
 			if (!this.compiledEquation)
 				this.compile();
-
 
 			return this.compiledEquation(x, z);
 		}

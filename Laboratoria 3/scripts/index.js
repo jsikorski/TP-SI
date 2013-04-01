@@ -1,8 +1,8 @@
 var coordinateSystem = new Models.CoordinateSystem();
+
 var equationModel = new Models.EquationModel('cos(x * z * z) * 5 * (cos(x*x+z*z) - sin(x) + cos(z) * sin(z)) + 100');
 equationModel.compile();
-var mesh = Models.Mesh.createFor(equationModel, 0, 250, 0, 250, 20);
-
+var mesh = Models.Mesh.createFor(equationModel, 0, 250, 0, 250, 10);
 
 var views = [
 	new Views.CoordinateSystem(coordinateSystem),

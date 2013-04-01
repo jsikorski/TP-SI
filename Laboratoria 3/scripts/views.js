@@ -26,6 +26,12 @@ Views = (function() {
 			var canvasWidth = canvasContext.canvas.width;
 			var canvasHeight = canvasContext.canvas.height;
 
+			if (line.from.hasLabels())
+				this.drawLabels(canvasContext, line.from.labels);
+
+			if (line.to.hasLabels())
+				this.drawLabels(canvasContext, line.to.labels);
+
 			var from = line.from
 				.to2D(alpha, beta)
 				.normalize(canvasWidth, canvasHeight);
@@ -38,6 +44,14 @@ Views = (function() {
 			canvasContext.lineTo(to.x, to.y);
 			canvasContext.strokeStyle = line.color || black;
 			canvasContext.stroke();
+		},
+
+		drawLabels: function(canvasContext, labels) {
+			for (var i = 0; i < labels.length; i++) {
+				var label = labels[i];
+				var labelView = new Label(label);
+				labelView.render(canvasContext);
+			};
 		}
 	});
 
@@ -59,6 +73,28 @@ Views = (function() {
 				var line = lines[i].scaleEnd(xFactor, yFactor, zFactor);
 				this.drawLine(canvasContext, line);
 			};
+		}
+	});
+
+
+	/**** Label ****/
+	var Label = function(model) {
+		View.prototype.constructor.apply(this, arguments);
+	};
+
+	_.extend(Label.prototype, View.prototype, {
+		render: function(canvasContext) {
+			canvasContext.fillStyle = black;
+			canvasContext.font = "bold 16px Arial";
+
+			var canvasWidth = canvasContext.canvas.width;
+			var canvasHeight = canvasContext.canvas.height;
+
+			var position = this.model.position
+				.to2D(alpha, beta)
+				.normalize(canvasWidth, canvasHeight);
+
+			canvasContext.fillText(this.model.text, position.x, position.y);
 		}
 	});
 
