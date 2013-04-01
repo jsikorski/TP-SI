@@ -34,35 +34,6 @@ Models = (function() {
 	};
 
 	_.extend(Point3D.prototype, {
-		multiplyByScalars: function(xFactor, yFactor, zFactor) {
-			var newX = this.x * xFactor;
-			var newY = this.y * yFactor;
-			var newZ = this.z * zFactor;
-
-			var newPoint = new Point3D(newX, newY, newZ);
-
-			if (!this.hasLabels())
-				return newPoint;
-
-			for (var i = 0; i < this.labels.length; i++) {
-				var label = this.labels[i];
-				var labelPosition = label.position;
-
-				var offsetX = labelPosition.x - this.x;
-				var offsetY = labelPosition.y - this.y;
-				var offsetZ = labelPosition.z - this.z;
-
-				newPoint.attachLabel(
-					label.text,
-					offsetX, 
-					offsetY,
-					offsetZ
-				);
-			};
-
-			return newPoint;
-		},
-
 		to2D: function(alpha, beta) {
 			var rotateA = Matrix.RotationX(alpha)
 			var rotateB = Matrix.RotationY(beta)
@@ -102,13 +73,6 @@ Models = (function() {
 		this.color = color;
 	};
 
-	_.extend(Line.prototype, {
-		scaleEnd: function(xFactor, yFactor, zFactor) {
-			var to = this.to.multiplyByScalars(xFactor, yFactor, zFactor);
-			return new Line(this.from, to, this.color);
-		}
-	});
-
 
 	/**** Lined model ****/
 	var LinedModel = function() {
@@ -123,11 +87,11 @@ Models = (function() {
 
 
 	/**** Coordinate system ****/
-	var CoordinateSystem = function() {
+	var CoordinateSystem = function(size) {
 		var origin = new Point3D(0, 0, 0);
-		var x = new Point3D(1, 0, 0);
-		var y = new Point3D(0, 1, 0);
-		var z = new Point3D(0, 0, 1);
+		var x = new Point3D(size, 0, 0);
+		var y = new Point3D(0, size, 0);
+		var z = new Point3D(0, 0, size);
 
 		x.attachLabel('x', -10, 20, 0);
 		y.attachLabel('y', 0, -10, 10);
