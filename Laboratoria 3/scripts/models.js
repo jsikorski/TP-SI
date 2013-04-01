@@ -75,11 +75,11 @@ Models = (function() {
 
 
 	/**** Lined model ****/
-	var LinedModel = function() {
+	var LineBasedModel = function() {
 		this.lines = [];
 	};
 
-	_.extend(LinedModel.prototype, {
+	_.extend(LineBasedModel.prototype, {
 		getLines: function() {
 			return this.lines;
 		}
@@ -87,15 +87,20 @@ Models = (function() {
 
 
 	/**** Coordinate system ****/
-	var CoordinateSystem = function(size) {
+	var CoordinateSystem = function(size, xMax, yMax, zMax) {
+		this.size = size;
+		this.xMax = xMax;
+		this.yMax = yMax;
+		this.zMax = zMax;
+
 		var origin = new Point3D(0, 0, 0);
 		var x = new Point3D(size, 0, 0);
 		var y = new Point3D(0, size, 0);
 		var z = new Point3D(0, 0, size);
 
-		x.attachLabel('x', -10, 20, 0);
-		y.attachLabel('y', 0, -10, 10);
-		z.attachLabel('z', 0, 20, -10);
+		x.attachLabel('x = ' + xMax, 10, 40, 0);
+		y.attachLabel('y = ' + yMax, 0, -10, 10);
+		z.attachLabel('z = ' + zMax, 0, 20, -10);
 
 		this.lines = [
 			new Line(origin, x, '#ff0000'),
@@ -104,18 +109,42 @@ Models = (function() {
 		]
 	};
 
-	_.extend(CoordinateSystem.prototype, LinedModel.prototype);
+	_.extend(CoordinateSystem.prototype, LineBasedModel.prototype);
+
+
+	/**** UserPreferences ****/
+	var MeshPreferences = function(xMin, xMax, yMax, zMin, zMax, delta) {
+		this.xMin = xMin;
+		this.xMax = xMax;
+		this.yMax = yMax;
+		this.zMin = zMin;
+		this.zMax = zMax;
+		this.delta = delta;
+	};
 
 
 	/**** Mesh ****/
 	var Mesh = function() {
-		LinedModel.constructor.apply(this, arguments);
+		LineBasedModel.constructor.apply(this, arguments);
 	};
 
 	_.extend(Mesh, {
-		createFor: function(equationModel, xMin, xMax, zMin, zMax, delta) {
+		createFor: function(equationModel, coordinateSystem, meshPreferences) {
 			if (!equationModel.validate())
 				throw 'Equation model is invalid';
+
+			xMin = meshPreferences.xMin
+			xMax = meshPreferences.xMax
+			zMin = meshPreferences.zMin;
+			zMax = meshPreferences.zMax;
+			yMax = meshPreferences.yMax;
+			delta = meshPreferences.delta;
+
+			scaleX = coordinateSystem.size / Math.max(Math.abs(xMin), Math.abs(xMax));
+			scaleY = coordinateSystem.size / yMax;
+			scaleZ = coordinateSystem.size / Math.max(Math.abs(zMin), Math.abs(zMax));
+
+			console.log(scaleY);
 
 			var lines = [];
 			for (var x = xMin; x < xMax; x+=delta) {
@@ -132,8 +161,17 @@ Models = (function() {
 					if (nextX < xMax) {
 						var yNextX = equationModel.getValue(nextX, z);
 						
-						var from = new Point3D(x, y, z);
-						var to = new Point3D(nextX, yNextX, z);
+						var from = new Point3D(
+							scaleX * x, 
+							scaleY * y, 
+							scaleZ * z
+						);
+
+						var to = new Point3D(
+							scaleX * nextX, 
+							scaleY * yNextX, 
+							scaleZ * z
+						);
 
 						lines.push(new Line(from, to));
 					}
@@ -141,8 +179,17 @@ Models = (function() {
 					if (nextZ < zMax) {
 						var yNextZ = equationModel.getValue(x, nextZ);
 						
-						var from = new Point3D(x, y, z);
-						var to = new Point3D(x, yNextZ, nextZ);
+						var from = new Point3D(
+							scaleX * x, 
+							scaleY * y, 
+							scaleX * z
+						);
+
+						var to = new Point3D(
+							scaleX * x, 
+							scaleY * yNextZ, 
+							scaleX * nextZ
+						);
 						
 						lines.push(new Line(from, to));
 					}
@@ -155,7 +202,7 @@ Models = (function() {
 		}
 	});
 
-	_.extend(Mesh.prototype, LinedModel.prototype);
+	_.extend(Mesh.prototype, LineBasedModel.prototype);
 
 
 	/**** Equation model ****/
@@ -206,6 +253,7 @@ Models = (function() {
 	return {
 		CoordinateSystem: CoordinateSystem,
 		EquationModel: EquationModel,
+		MeshPreferences: MeshPreferences,
 		Mesh: Mesh
 	};
 })();

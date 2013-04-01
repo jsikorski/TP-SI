@@ -1,17 +1,18 @@
 var canvas = document.createElement('canvas');
-canvas.width = 800;
-canvas.height = 800;
+canvas.width = 500;
+canvas.height = 500;
 var canvasContext = canvas.getContext('2d');
 
 
-var coordinateSystem = new Models.CoordinateSystem(canvas.width / 2);
+var coordinateSystem = new Models.CoordinateSystem(canvas.height / 2, 150, 20, 150);
 
 var equationModel = new Models.EquationModel(
-	'cos(x * z * z) * 5 * (cos(x*x+z*z) - sin(x) + cos(z) * sin(z)) + 100'
+	'cos(x * z * z) * (cos(x*x+z*z) - sin(x) + cos(z) * sin(z)) + 5'
 );
 equationModel.compile();
 
-var mesh = Models.Mesh.createFor(equationModel, 0, 400, 0, 400, 30);
+var meshPreferences = new Models.MeshPreferences(0, 150, 20, 0, 150, 10);
+var mesh = Models.Mesh.createFor(equationModel, coordinateSystem, meshPreferences);
 
 var views = [
 	new Views.View(coordinateSystem),
