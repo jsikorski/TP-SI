@@ -56,27 +56,6 @@ Views = (function() {
 	});
 
 
-	/**** Coordinate system ****/
-	var CoordinateSystem = function(model) {
-		View.prototype.constructor.apply(this, arguments);
-	};
-
-	_.extend(CoordinateSystem.prototype, View.prototype, {
-		render: function(canvasContext) {
-			var lines = this.model.getLines();
-
-			for (var i = 0; i < lines.length; i++) {
-				var xFactor = canvasContext.canvas.width / 2;
-				var yFactor = canvasContext.canvas.height / 2;
-				var zFactor = canvasContext.canvas.width / 2;
-
-				var line = lines[i].scaleEnd(xFactor, yFactor, zFactor);
-				this.drawLine(canvasContext, line);
-			};
-		}
-	});
-
-
 	/**** Label ****/
 	var Label = function(model) {
 		View.prototype.constructor.apply(this, arguments);
@@ -117,7 +96,6 @@ Views = (function() {
 	/**** Exports ****/
 	return {
 		View: View,
-		CoordinateSystem: CoordinateSystem,
 		Renderer: Renderer
 	};
 })();
