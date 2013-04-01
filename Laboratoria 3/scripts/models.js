@@ -160,22 +160,26 @@ Models = (function() {
 					var nextZ = z + delta;
 
 					var y = equationModel.getValue(x, z);
-					var yNextX = equationModel.getValue(nextX, z);
-					var yNextZ = equationModel.getValue(x, nextZ);
-
+					
 					// Ommit points with undefined values.
 					if (!y)
 						continue;
 
 					if (nextX < xMax) {
+						var yNextX = equationModel.getValue(nextX, z);
+						
 						var from = new Point3D(x, y, z);
 						var to = new Point3D(nextX, yNextX, z);
+
 						lines.push(new Line(from, to));
 					}
 
 					if (nextZ < zMax) {
+						var yNextZ = equationModel.getValue(x, nextZ);
+						
 						var from = new Point3D(x, y, z);
 						var to = new Point3D(x, yNextZ, nextZ);
+						
 						lines.push(new Line(from, to));
 					}
 				};
