@@ -1,0 +1,13 @@
+form .data-line {
+	margin-bottom: 10px;
+}
+
+form .data-line label {
+	min-width: 50px;
+	display: inline-block;
+}
+
+form .data-line #equation {
+	min-width: 290px;
+	display: inline-block;
+}

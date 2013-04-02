@@ -1,25 +1,32 @@
-var canvas = document.createElement('canvas');
-canvas.width = 500;
-canvas.height = 500;
-var canvasContext = canvas.getContext('2d');
+var init = function(ui) {
+	var canvasContext = ui.getCanvasContext();
 
+	ui.onSubmit(function(event) {
+		event.preventDefault();
 
-var coordinateSystem = new Models.CoordinateSystem(canvas.height / 2, 150, 20, 150);
+		var canvas = canvasContext.canvas;
+		var coordinateSystem = new Models.CoordinateSystem(canvas.height / 2, 150, 20, 150);
 
-var equationModel = new Models.EquationModel(
-	'cos(x * z * z) * (cos(x*x+z*z) - sin(x) + cos(z) * sin(z)) + 5'
-);
-equationModel.compile();
+		var equationModel = new Models.EquationModel(ui.getEquation());
+		
+		if (!equationModel.validate()) {
+			alert("Równanie nie jest prawidłowe.");
+			return;
+		}
 
-var meshPreferences = new Models.MeshPreferences(0, 150, 20, 0, 150, 10);
-var mesh = Models.Mesh.createFor(equationModel, coordinateSystem, meshPreferences);
+		equationModel.compile();
 
-var views = [
-	new Views.View(coordinateSystem),
-	new Views.View(mesh)
-];
+		var meshPreferences = new Models.MeshPreferences(0, 150, 20, 0, 150, 15);
+		var mesh = Models.Mesh.createFor(equationModel, coordinateSystem, meshPreferences);
 
-var renderer = new Views.Renderer(canvasContext, views);
-renderer.render();
+		var views = [
+			new Views.View(coordinateSystem),
+			new Views.View(mesh)
+		];
 
-document.body.appendChild(canvas);
+		var renderer = new Views.Renderer(canvasContext, views);
+		renderer.render();
+	});
+};
+
+var ui = Interface.init(init);

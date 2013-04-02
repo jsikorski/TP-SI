@@ -144,8 +144,6 @@ Models = (function() {
 			scaleY = coordinateSystem.size / yMax;
 			scaleZ = coordinateSystem.size / Math.max(Math.abs(zMin), Math.abs(zMax));
 
-			console.log(scaleY);
-
 			var lines = [];
 			for (var x = xMin; x < xMax; x+=delta) {
 				for (var z = zMin; z < zMax; z+=delta) {
