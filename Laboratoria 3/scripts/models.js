@@ -148,8 +148,6 @@ Models = (function() {
 			scaleY = coordinateSystem.size / yMax;
 			scaleZ = coordinateSystem.size / Math.max(Math.abs(zMin), Math.abs(zMax));
 
-			console.log("ScaleZ: " + scaleZ)
-
 			var lines = [];
 			for (var x = xMin; x <= xMax; x += deltaX) {
 				for (var z = zMin; z <= zMax; z += deltaZ) {
@@ -212,7 +210,6 @@ Models = (function() {
 
 			var mesh = new Mesh();
 			mesh.lines = lines;
-			console.log(mesh.lines);
 			return mesh;
 		}
 	});
