@@ -12,45 +12,50 @@ Views = (function() {
 	};
 
 	_.extend(View.prototype, {
-		render: function(canvasContext) {
+		render: function(svg) {
 			var lines = this.model.getLines();
 
 			for (var i = 0; i < lines.length; i++) {
-				this.drawLine(canvasContext, lines[i]);			
+				var path = document.createElementNS(svg.getAttribute('xmlns'), 'path');
+				this.drawLine(path, lines[i], svg);
+				svg.appendChild(path);
 			};
 		},
 
-		drawLine: function(canvasContext, line) {
-			canvasContext.beginPath();
-
-			var canvasWidth = canvasContext.canvas.width;
-			var canvasHeight = canvasContext.canvas.height;
-
+		drawLine: function(path, line, svg) {
 			if (line.from.hasLabels())
-				this.drawLabels(canvasContext, line.from.labels);
+				this.drawLabels(svg, line.from.labels);
 
 			if (line.to.hasLabels())
-				this.drawLabels(canvasContext, line.to.labels);
+				this.drawLabels(svg, line.to.labels);
+
+			var svgWidth = svg.width.baseVal.value;
+			var svgHeight = svg.height.baseVal.value;
 
 			var from = line.from
 				.to2D(alpha, beta)
-				.normalize(canvasWidth, canvasHeight);
+				.normalize(svgWidth, svgHeight);
 			
 			var to = line.to
 				.to2D(alpha, beta)
-				.normalize(canvasWidth, canvasHeight);
+				.normalize(svgWidth, svgHeight);
 
-			canvasContext.moveTo(from.x, from.y);
-			canvasContext.lineTo(to.x, to.y);
-			canvasContext.strokeStyle = line.color || black;
-			canvasContext.stroke();
+			var from = path.createSVGPathSegMovetoAbs(from.x, from.y);
+			var to = path.createSVGPathSegLinetoAbs(to.x, to.y);
+
+			path.style.stroke = line.color || black;
+			path.style.fill = "none";
+			path.style.strokeWidth = "1";
+
+			path.pathSegList.appendItem(from)
+			path.pathSegList.appendItem(to)
 		},
 
-		drawLabels: function(canvasContext, labels) {
+		drawLabels: function(svg, labels) {
 			for (var i = 0; i < labels.length; i++) {
 				var label = labels[i];
 				var labelView = new Label(label);
-				labelView.render(canvasContext);
+				labelView.render(svg);
 			};
 		}
 	});
@@ -62,32 +67,37 @@ Views = (function() {
 	};
 
 	_.extend(Label.prototype, View.prototype, {
-		render: function(canvasContext) {
-			canvasContext.fillStyle = black;
-			canvasContext.font = "bold 16px Arial";
+		render: function(svg) {
+			var text = document.createElementNS(svg.getAttribute('xmlns'), 'text');
 
-			var canvasWidth = canvasContext.canvas.width;
-			var canvasHeight = canvasContext.canvas.height;
+			var labelText = document.createTextNode(this.model.text);
+			text.appendChild(labelText);
+
+			var svgWidth = svg.width.baseVal.value;
+			var svgHeight = svg.height.baseVal.value;
 
 			var position = this.model.position
 				.to2D(alpha, beta)
-				.normalize(canvasWidth, canvasHeight);
+				.normalize(svgWidth, svgHeight);
 
-			canvasContext.fillText(this.model.text, position.x, position.y);
+			text.setAttribute('x', position.x);
+			text.setAttribute('y', position.y);
+
+			svg.appendChild(text);
 		}
 	});
 
 
 	/**** Renderer ****/
-	var Renderer = function(canvasContext, views) {
-		this.canvasContext = canvasContext;
+	var Renderer = function(svg, views) {
+		this.svg = svg;
 		this.views = views;
 	};
 
 	_.extend(Renderer.prototype, {
 		render: function() {
 			for (var i = 0; i < this.views.length; i++) {
-				this.views[i].render(this.canvasContext);
+				this.views[i].render(this.svg);
 			};
 		}
 	});

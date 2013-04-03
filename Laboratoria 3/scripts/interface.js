@@ -18,13 +18,13 @@ Interface = (function() {
 
 	/**** Graph area ****/
 	var GraphArea = function(Y) {
-		this.el = Y.Node.one('canvas');
-		this.el.set('width', 500);
-		this.el.set('height', 500);
+		this.el = Y.Node.one('svg');
+		// this.el.set('width', 500);
+		// this.el.set('height', 500);
 	};
 
 	_.extend(GraphArea.prototype, {
-		getCanvas: function() {
+		getSvg: function() {
 			return this.el.getDOMNode();
 		}
 	});
@@ -37,11 +37,11 @@ Interface = (function() {
 	};
 
 	_.extend(UIContext.prototype, {
-		getCanvasContext: function() {
-			return this.graphArea
-				.getCanvas()
-				.getContext('2d');
-		},
+		// getCanvasContext: function() {
+		// 	return this.graphArea
+		// 		.getCanvas()
+		// 		.getContext('2d');
+		// },
 
 		onSubmit: function(action) {
 			this.settingsPanel.onSubmit(action);
@@ -49,6 +49,10 @@ Interface = (function() {
 
 		getEquation: function() {
 			return this.settingsPanel.getEquation();
+		},
+
+		getSvg: function() {
+			return this.graphArea.getSvg();
 		}
 	});
 
