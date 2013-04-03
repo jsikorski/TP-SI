@@ -155,7 +155,7 @@ Models = (function() {
 					var y = equationModel.getValue(x, z);
 					
 					// Ommit points with undefined values.
-					if (!y)
+					if (y === undefined)
 						continue;
 
 					// Ommit points with value out of range.
