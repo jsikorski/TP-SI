@@ -113,9 +113,10 @@ Models = (function() {
 
 
 	/**** UserPreferences ****/
-	var MeshPreferences = function(xMin, xMax, yMax, zMin, zMax, delta) {
+	var MeshPreferences = function(xMin, xMax, yMin, yMax, zMin, zMax, delta) {
 		this.xMin = xMin;
 		this.xMax = xMax;
+		this.yMin = yMin;
 		this.yMax = yMax;
 		this.zMin = zMin;
 		this.zMax = zMax;
@@ -137,6 +138,7 @@ Models = (function() {
 			xMax = meshPreferences.xMax
 			zMin = meshPreferences.zMin;
 			zMax = meshPreferences.zMax;
+			yMin = meshPreferences.yMin;
 			yMax = meshPreferences.yMax;
 			delta = meshPreferences.delta;
 
@@ -154,6 +156,10 @@ Models = (function() {
 					
 					// Ommit points with undefined values.
 					if (!y)
+						continue;
+
+					// Ommit points with value out of range.
+					if (y > yMax || y < yMin)
 						continue;
 
 					if (nextX < xMax) {
