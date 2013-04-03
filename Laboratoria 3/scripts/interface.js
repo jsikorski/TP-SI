@@ -24,6 +24,11 @@ Interface = (function() {
 	_.extend(GraphArea.prototype, {
 		getSvg: function() {
 			return this.el.getDOMNode();
+		},
+
+		clear: function() {
+			this.el.all('path').remove(true);
+			this.el.all('text').remove(true);
 		}
 	});
 
@@ -45,6 +50,10 @@ Interface = (function() {
 
 		getSvg: function() {
 			return this.graphArea.getSvg();
+		},
+
+		clearGraph: function() {
+			this.graphArea.clear();
 		}
 	});
 

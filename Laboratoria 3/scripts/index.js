@@ -16,7 +16,7 @@ var init = function(ui) {
 
 		equationModel.compile();
 
-		var meshPreferences = new Models.MeshPreferences(0, 150, 20, 0, 150, 15);
+		var meshPreferences = new Models.MeshPreferences(0, 150, 20, 0, 150, 10);
 		var mesh = Models.Mesh.createFor(equationModel, coordinateSystem, meshPreferences);
 
 		var views = [
@@ -24,6 +24,7 @@ var init = function(ui) {
 			new Views.View(mesh)	
 		];
 
+		ui.clearGraph();
 		var renderer = new Views.Renderer(canvasContext, views);
 		renderer.render();
 	});
