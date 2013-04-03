@@ -12,7 +12,7 @@ var init = function(ui) {
 		equationModel.compile();
 
 		var coordinateSystem = new Models.CoordinateSystem(500 / 2, 150, 20, 150);
-		var meshPreferences = new Models.MeshPreferences(0, 150, 0, 20, 0, 150, 10, 20);
+		var meshPreferences = new Models.MeshPreferences(0, 150, 0, 20, 0, 150, 15, 15);
 		var mesh = Models.Mesh.createFor(equationModel, coordinateSystem, meshPreferences);
 
 		var views = [
