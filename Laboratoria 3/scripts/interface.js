@@ -12,6 +12,19 @@ Interface = (function() {
 
 		getEquation: function() {
 			return this.el.one('#equation').get('value');
+		},
+
+		getSettings: function() {
+			return {
+				xMin: parseInt(this.el.one('#x-min').get('value')),
+				xMax: parseInt(this.el.one('#x-max').get('value')),
+				yMin: parseInt(this.el.one('#y-min').get('value')),
+				yMax: parseInt(this.el.one('#y-max').get('value')),
+				zMin: parseInt(this.el.one('#z-min').get('value')),
+				zMax: parseInt(this.el.one('#z-max').get('value')),
+				deltaX: parseInt(this.el.one('#delta-x').get('value')),
+				deltaZ: parseInt(this.el.one('#delta-z').get('value'))
+			};
 		}
 	});
 
@@ -46,6 +59,10 @@ Interface = (function() {
 
 		getEquation: function() {
 			return this.settingsPanel.getEquation();
+		},
+
+		getSettings: function() {
+			return this.settingsPanel.getSettings();
 		},
 
 		getSvg: function() {

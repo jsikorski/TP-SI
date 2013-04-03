@@ -11,8 +11,26 @@ var init = function(ui) {
 		}
 		equationModel.compile();
 
-		var coordinateSystem = new Models.CoordinateSystem(500 / 2, 150, 20, 150);
-		var meshPreferences = new Models.MeshPreferences(0, 150, 0, 20, 0, 150, 15, 15);
+		var settings = ui.getSettings();
+		
+		var coordinateSystem = new Models.CoordinateSystem(
+			svg.width.baseVal.value / 2, 
+			settings.xMax, 
+			settings.yMax, 
+			settings.zMax
+		);
+
+		var meshPreferences = new Models.MeshPreferences(
+			settings.xMin, 
+			settings.xMax, 
+			settings.yMin, 
+			settings.yMax, 
+			settings.zMin, 
+			settings.zMax, 
+			settings.deltaX, 
+			settings.deltaZ
+		);
+
 		var mesh = Models.Mesh.createFor(equationModel, coordinateSystem, meshPreferences);
 
 		var views = [
