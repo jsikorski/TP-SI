@@ -4,7 +4,6 @@ var init = function(ui) {
 	ui.onSubmit(function(event) {
 		event.preventDefault();
 
-		// var canvas = canvasContext.canvas;
 		var coordinateSystem = new Models.CoordinateSystem(500 / 2, 150, 20, 150);
 
 		var equationModel = new Models.EquationModel(ui.getEquation());
