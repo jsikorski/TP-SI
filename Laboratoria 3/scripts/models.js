@@ -148,6 +148,8 @@ Models = (function() {
 			scaleY = coordinateSystem.size / yMax;
 			scaleZ = coordinateSystem.size / Math.max(Math.abs(zMin), Math.abs(zMax));
 
+			console.log("ScaleZ: " + scaleZ)
+
 			var lines = [];
 			for (var x = xMin; x <= xMax; x += deltaX) {
 				for (var z = zMin; z <= zMax; z += deltaZ) {
@@ -194,13 +196,13 @@ Models = (function() {
 						var from = new Point3D(
 							scaleX * x, 
 							scaleY * y, 
-							scaleX * z
+							scaleZ * z
 						);
 
 						var to = new Point3D(
 							scaleX * x, 
 							scaleY * yNextZ, 
-							scaleX * nextZ
+							scaleZ * nextZ
 						);
 						
 						lines.push(new Line(from, to));
@@ -210,6 +212,7 @@ Models = (function() {
 
 			var mesh = new Mesh();
 			mesh.lines = lines;
+			console.log(mesh.lines);
 			return mesh;
 		}
 	});
