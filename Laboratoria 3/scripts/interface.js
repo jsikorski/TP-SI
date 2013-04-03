@@ -19,8 +19,6 @@ Interface = (function() {
 	/**** Graph area ****/
 	var GraphArea = function(Y) {
 		this.el = Y.Node.one('svg');
-		// this.el.set('width', 500);
-		// this.el.set('height', 500);
 	};
 
 	_.extend(GraphArea.prototype, {
@@ -37,12 +35,6 @@ Interface = (function() {
 	};
 
 	_.extend(UIContext.prototype, {
-		// getCanvasContext: function() {
-		// 	return this.graphArea
-		// 		.getCanvas()
-		// 		.getContext('2d');
-		// },
-
 		onSubmit: function(action) {
 			this.settingsPanel.onSubmit(action);
 		},
