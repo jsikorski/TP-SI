@@ -1,20 +1,17 @@
 var init = function(ui) {
-	var canvasContext = ui.getSvg();
+	var svg = ui.getSvg();
 
 	ui.onSubmit(function(event) {
 		event.preventDefault();
 
-		var coordinateSystem = new Models.CoordinateSystem(500 / 2, 150, 20, 150);
-
 		var equationModel = new Models.EquationModel(ui.getEquation());
-		
 		if (!equationModel.validate()) {
 			alert("Równanie nie jest prawidłowe.");
 			return;
 		}
-
 		equationModel.compile();
 
+		var coordinateSystem = new Models.CoordinateSystem(500 / 2, 150, 20, 150);
 		var meshPreferences = new Models.MeshPreferences(0, 150, 20, 0, 150, 10);
 		var mesh = Models.Mesh.createFor(equationModel, coordinateSystem, meshPreferences);
 
@@ -23,8 +20,8 @@ var init = function(ui) {
 			new Views.View(mesh)	
 		];
 
+		var renderer = new Views.Renderer(svg, views);
 		ui.clearGraph();
-		var renderer = new Views.Renderer(canvasContext, views);
 		renderer.render();
 	});
 };
