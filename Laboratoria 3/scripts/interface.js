@@ -13,7 +13,17 @@ Interface = (function() {
 
 			return settings;
 		}
-	})
+	});
+
+	_.extend(Settings.prototype, {
+		validate: function() {
+			return this.xMin <= this.xMax &&
+				this.yMin <= this.yMax &&
+				this.zMin <= this.zMax &&
+				this.deltaX > 0 &&
+				this.deltaZ > 0;
+		}
+	});
 
 
 	/**** Settings panel ****/

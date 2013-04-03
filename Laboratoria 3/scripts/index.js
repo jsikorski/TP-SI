@@ -12,6 +12,10 @@ var init = function(ui) {
 		equationModel.compile();
 
 		var settings = ui.getSettings();
+		if (!settings.validate()) {
+			alert("Wprowadzone ustawienia nie są prawidłowe.");
+			return;
+		}
 		
 		var coordinateSystem = new Models.CoordinateSystem(
 			svg.width.baseVal.value / 2, 
