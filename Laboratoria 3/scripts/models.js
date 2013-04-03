@@ -165,6 +165,9 @@ Models = (function() {
 					if (nextX < xMax) {
 						var yNextX = equationModel.getValue(nextX, z);
 						
+						if (yNextX > yMax || yNextX < yMin)
+							continue;
+
 						var from = new Point3D(
 							scaleX * x, 
 							scaleY * y, 
@@ -183,6 +186,9 @@ Models = (function() {
 					if (nextZ < zMax) {
 						var yNextZ = equationModel.getValue(x, nextZ);
 						
+						if (yNextZ > yMax || yNextZ < yMin)
+							continue;
+
 						var from = new Point3D(
 							scaleX * x, 
 							scaleY * y, 
