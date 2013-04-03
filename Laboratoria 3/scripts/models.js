@@ -113,14 +113,15 @@ Models = (function() {
 
 
 	/**** UserPreferences ****/
-	var MeshPreferences = function(xMin, xMax, yMin, yMax, zMin, zMax, delta) {
+	var MeshPreferences = function(xMin, xMax, yMin, yMax, zMin, zMax, deltaX, deltaZ) {
 		this.xMin = xMin;
 		this.xMax = xMax;
 		this.yMin = yMin;
 		this.yMax = yMax;
 		this.zMin = zMin;
 		this.zMax = zMax;
-		this.delta = delta;
+		this.deltaX = deltaX;
+		this.deltaZ = deltaZ;
 	};
 
 
@@ -140,17 +141,18 @@ Models = (function() {
 			zMax = meshPreferences.zMax;
 			yMin = meshPreferences.yMin;
 			yMax = meshPreferences.yMax;
-			delta = meshPreferences.delta;
+			deltaX = meshPreferences.deltaX;
+			deltaZ = meshPreferences.deltaZ;
 
 			scaleX = coordinateSystem.size / Math.max(Math.abs(xMin), Math.abs(xMax));
 			scaleY = coordinateSystem.size / yMax;
 			scaleZ = coordinateSystem.size / Math.max(Math.abs(zMin), Math.abs(zMax));
 
 			var lines = [];
-			for (var x = xMin; x < xMax; x+=delta) {
-				for (var z = zMin; z < zMax; z+=delta) {
-					var nextX = x + delta;
-					var nextZ = z + delta;
+			for (var x = xMin; x < xMax; x += deltaX) {
+				for (var z = zMin; z < zMax; z += deltaZ) {
+					var nextX = x + deltaX;
+					var nextZ = z + deltaZ;
 
 					var y = equationModel.getValue(x, z);
 					
