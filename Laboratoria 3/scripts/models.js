@@ -149,8 +149,8 @@ Models = (function() {
 			scaleZ = coordinateSystem.size / Math.max(Math.abs(zMin), Math.abs(zMax));
 
 			var lines = [];
-			for (var x = xMin; x < xMax; x += deltaX) {
-				for (var z = zMin; z < zMax; z += deltaZ) {
+			for (var x = xMin; x <= xMax; x += deltaX) {
+				for (var z = zMin; z <= zMax; z += deltaZ) {
 					var nextX = x + deltaX;
 					var nextZ = z + deltaZ;
 
@@ -164,7 +164,7 @@ Models = (function() {
 					if (y > yMax || y < yMin)
 						continue;
 
-					if (nextX < xMax) {
+					if (nextX <= xMax) {
 						var yNextX = equationModel.getValue(nextX, z);
 						
 						if (yNextX > yMax || yNextX < yMin)
@@ -185,7 +185,7 @@ Models = (function() {
 						lines.push(new Line(from, to));
 					}
 
-					if (nextZ < zMax) {
+					if (nextZ <= zMax) {
 						var yNextZ = equationModel.getValue(x, nextZ);
 						
 						if (yNextZ > yMax || yNextZ < yMin)
