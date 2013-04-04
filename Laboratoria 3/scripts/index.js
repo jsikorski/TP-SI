@@ -19,9 +19,9 @@ var init = function(ui) {
 		
 		var coordinateSystem = new Models.CoordinateSystem(
 			svg.width.baseVal.value / 2, 
-			settings.xMax, 
-			settings.yMax, 
-			settings.zMax
+			settings.xMax > 0 ? settings.xMax : Math.abs(settings.xMin), 
+			settings.yMax > 0 ? settings.yMax : Math.abs(settings.yMin), 
+			settings.zMax > 0 ? settings.zMax : Math.abs(settings.zMin)
 		);
 
 		var meshPreferences = new Models.MeshPreferences(

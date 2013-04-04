@@ -135,18 +135,22 @@ Models = (function() {
 			if (!equationModel.validate())
 				throw 'Equation model is invalid';
 
-			xMin = meshPreferences.xMin
-			xMax = meshPreferences.xMax
-			zMin = meshPreferences.zMin;
-			zMax = meshPreferences.zMax;
-			yMin = meshPreferences.yMin;
-			yMax = meshPreferences.yMax;
-			deltaX = meshPreferences.deltaX;
-			deltaZ = meshPreferences.deltaZ;
+			var xMin = meshPreferences.xMin
+			var xMax = meshPreferences.xMax
+			var zMin = meshPreferences.zMin;
+			var zMax = meshPreferences.zMax;
+			var yMin = meshPreferences.yMin;
+			var yMax = meshPreferences.yMax;
+			var deltaX = meshPreferences.deltaX;
+			var deltaZ = meshPreferences.deltaZ;
 
-			scaleX = coordinateSystem.size / Math.max(Math.abs(xMin), Math.abs(xMax));
-			scaleY = coordinateSystem.size / yMax;
-			scaleZ = coordinateSystem.size / Math.max(Math.abs(zMin), Math.abs(zMax));
+			var xForScale = xMax > 0 ? xMax : Math.abs(xMin);
+			var yForScale = yMax > 0 ? yMax : Math.abs(yMin);
+			var zForScale = zMax > 0 ? zMax : Math.abs(zMin);
+
+			var scaleX = coordinateSystem.size / xForScale;
+			var scaleY = coordinateSystem.size / yForScale;
+			var scaleZ = coordinateSystem.size / zForScale;
 
 			var lines = [];
 			for (var x = xMin; x <= xMax; x += deltaX) {
