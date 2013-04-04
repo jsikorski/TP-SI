@@ -224,14 +224,10 @@ Models = (function() {
 
 	_.extend(EquationModel.prototype, {
 		validate: function() {
-			var sqrt = Math.sqrt;
-			var sin = Math.sin;
-			var cos = Math.cos;
-
 			try {
 				var x = 0;
 				var z = 0;
-				eval(this.equation);
+				eval(this.enchant(this.equation));
 			}
 			catch (error) {
 				return false;
@@ -245,11 +241,20 @@ Models = (function() {
 				throw "Cannot compile equation.";
 
 			eval('this.compiledEquation = function(x, z) {' + 
-					'var sqrt = Math.sqrt;' +
-				   	'var sin = Math.sin;' + 
-				   	'var cos = Math.cos;' +
-					'return ' + this.equation + 
+					'return ' + this.enchant(this.equation) + 
 				';}');
+		},
+
+		enchant: function(equation) {
+			var equationCopy = equation;
+			
+			var maths = Object.getOwnPropertyNames(Math);
+			for (var i = 0; i < maths.length; i++) {
+				var math = maths[i];
+				equationCopy = equationCopy.replace(new RegExp(math, 'g'), 'Math.' + math);
+			};
+
+			return equationCopy;
 		},
 
 		getValue: function(x, z) {
